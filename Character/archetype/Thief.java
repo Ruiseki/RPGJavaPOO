@@ -44,14 +44,14 @@ public class Thief extends Archetype {
         return _critRate;
     }
     public void setCritRate(double newCritRate){
-        newCritRate = _critRate;
+        _critRate = newCritRate;
     }
 
     public double getCritDamage(){
         return _dodge;
     }
     public void setCritDamage(double newCritDamage){
-        newCritDamage = _critDamage;
+        _critDamage = newCritDamage;
     }
 
 }

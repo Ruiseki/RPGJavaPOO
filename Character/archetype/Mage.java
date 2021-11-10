@@ -1,9 +1,11 @@
 package Character.archetype;
+import javax.swing.AbstractAction;
+
 import Character.Archetype;
 
 public class Mage extends Archetype {
-    private int _magicDamage;
-    private double _magicStamina; // magic damage will be divided by 2 each turn
+    private double _magicDamage;
+    private int _magicStamina = 1; // magic damage will be divided by 2 each turn. magicStamina will be multiply by 2 each turn to make magicDamage / magicStamina = total magicdamage
     
     public Mage()
     {
@@ -18,7 +20,6 @@ public class Mage extends Archetype {
     public Mage(String name, int magicDamage)
     {
         _magicDamage = magicDamage;
-        _magicStamina = _magicDamage;
         if(name.equals(""))
         {
             _name = "Warrior";
@@ -32,21 +33,28 @@ public class Mage extends Archetype {
         _attack = 5;
     }
 
-    public int getMagicDamage()
+    public int getTotalDamageOnTurn()
+    {   
+        int damage = (int)(_magicDamage / _magicStamina + _attack);
+        _magicDamage *= 2;
+        return damage;
+    }
+    
+    public double getMagicDamage()
     {
         return _magicDamage;
     }
-    public double getMagiStamina()
+    public int getMagicStamina()
     {
         return _magicStamina;
     }
 
-    public void setMagicDamage(int newMagicDamage)
+    public void setMagicDamage(double newMagicDamage)
     {
-        newMagicDamage = _magicDamage;
+        _magicDamage = newMagicDamage;
     }
-    public void setMagicStamina(double newMagicStamina)
+    public void setMagicStamina(int newMagicStamina)
     {
-        newMagicStamina = _magicStamina;
+        _magicStamina = newMagicStamina;
     }
 }

@@ -30,4 +30,30 @@ abstract public class Game {
         } while (!isInput);
         return input;
     }
+
+    public static void createCharacter() {};
+    /*
+        Permet d'ajouter un personnage jouable dans une liste restreinte (5 perso par personne max)
+        Le joueur doit lire le nom du personnage et ça classe. (quelque chose comme Robert - Guerrier)
+        Le joueur vas pouvoir choisir une configuration simple (il dois juste renseigné le nom de perso)
+        et une configuration avancé ou il vas choisir toute les infos spécifique ou non au personnage
+    */
+
+    public static void deleteCharacter() {};
+    /* 
+        Supprime un perso de la list des perso jouable par le joueur.
+        Doit pouvoir afficher "[ empty ]" lors d'un balayage lorsque la place est libre.
+    */
+        
+    public static void watchCharacterDeck() {};
+    /*
+        Affiche le deck du joueur qui joue
+        Pourrais ressemblé à ça :
+
+        LeLache, Thief
+        Arthur, Warrior
+        Goliath, Warrior (av.)
+        [ empty ]
+        [ empty ]
+    */
 }

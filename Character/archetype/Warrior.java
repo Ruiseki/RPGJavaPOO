@@ -31,6 +31,11 @@ public class Warrior extends Archetype
         _attack = 3;
     }
 
+    public int blockAttack(int damage)
+    {
+        return damage - _shieldStrength;
+    }
+
     public int getShieldStrength()
     {
         return _shieldStrength;

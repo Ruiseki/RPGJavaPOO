@@ -1,4 +1,5 @@
 package Character;
+
 public abstract class Archetype {
 
     protected String _name;
@@ -10,14 +11,14 @@ public abstract class Archetype {
         name = _name;
     }
 
-    public void attack(Archetype offenser, Archetype defender)
+    public void takeDamage(int damage)
     {
-        System.out.println(offenser);
+        _health -= damage;
     }
 
     public int getAttack()
     {
-        return _attack;   
+        return _attack;
     }
     public int getHeath()
     {
