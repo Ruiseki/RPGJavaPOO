@@ -1,15 +1,23 @@
-import Character.Archetype;
-import Character.archetype.*;
+package src;
+import src.Character.Archetype;
+import src.Character.archetype.*;
 
 class Main
 {
     public static void main(String[] args)
     {
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
         System.out.println("Application has started");
         Mage attaquantTest = new Mage();
         Warrior defenseurTest = new Warrior();
 
         attack(attaquantTest, defenseurTest);
+    }
+
+    public static void clear()
+    {
+        
     }
 
     public static void attack(Archetype offenser, Archetype defenser)

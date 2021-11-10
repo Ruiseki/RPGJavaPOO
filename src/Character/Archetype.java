@@ -1,4 +1,4 @@
-package Character;
+package src.Character;
 
 public abstract class Archetype {
 
@@ -6,6 +6,7 @@ public abstract class Archetype {
     protected int _attack, _health, _initiative;
 
     public Archetype() {};
+
     public Archetype(String name)
     {
         name = _name;

@@ -1,5 +1,5 @@
-package Character.archetype;
-import Character.Archetype;
+package src.Character.archetype;
+import src.Character.Archetype;
 
 public class Warrior extends Archetype
 {

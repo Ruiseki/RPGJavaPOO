@@ -1,4 +1,4 @@
-package GameSystem;
+package src.GameSystem;
 
 
 import java.util.InputMismatchException;

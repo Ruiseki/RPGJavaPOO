@@ -1,5 +1,5 @@
-package Character.archetype;
-import Character.Archetype;
+package src.Character.archetype;
+import src.Character.Archetype;
 
 public class Thief extends Archetype {
     private double _dodge, _critRate, _critDamage;
@@ -33,24 +33,33 @@ public class Thief extends Archetype {
         _attack = 4;
     }
 
-    public double getDodge(){
+    public double getDodge()
+    {
         return _dodge;
     }
-    public void setDodge(){
+
+    public void setDodge()
+    {
 
     }
 
-    public double getCriRate(){
+    public double getCriRate()
+    {
         return _critRate;
     }
-    public void setCritRate(double newCritRate){
+
+    public void setCritRate(double newCritRate)
+    {
         _critRate = newCritRate;
     }
 
-    public double getCritDamage(){
+    public double getCritDamage()
+    {
         return _dodge;
     }
-    public void setCritDamage(double newCritDamage){
+    
+    public void setCritDamage(double newCritDamage)
+    {
         _critDamage = newCritDamage;
     }
 

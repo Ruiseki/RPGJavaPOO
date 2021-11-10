@@ -1,7 +1,6 @@
-package Character.archetype;
-import javax.swing.AbstractAction;
+package src.Character.archetype;
 
-import Character.Archetype;
+import src.Character.Archetype;
 
 public class Mage extends Archetype {
     private double _magicDamage;
