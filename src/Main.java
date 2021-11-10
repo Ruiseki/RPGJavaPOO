@@ -11,7 +11,6 @@ class Main
         System.out.println("Application has started");
         Mage attaquantTest = new Mage();
         Warrior defenseurTest = new Warrior();
-
         attack(attaquantTest, defenseurTest);
     }
 
@@ -27,7 +26,16 @@ class Main
         System.out.println(offenser.getName()+" is attacking !");
 
         if(offenser instanceof Mage) totalDamage = ((Mage)offenser).getTotalDamageOnTurn();
-        // else if(offenser instanceof Thief) Faudra calculer l'attaque du voleur
+        else if(offenser instanceof Thief) 
+        {
+            double number = Math.random();
+            if(number <= ((Thief)offenser).getCriRate())
+            {
+                System.out.println(offenser.getName()+ "inflicts critical Damage");
+                totalDamage = ((Thief)offenser).critDamage();
+            }
+            else totalDamage = offenser.getAttack();
+        }
         else totalDamage = offenser.getAttack();
         
         // calcule du taux crit du voleur
@@ -41,6 +49,10 @@ class Main
             totalDamage = ((Warrior)defenser).blockAttack(totalDamage);
         }
 
+        else if(defenser instanceof Thief)
+        {
+            
+        }
         System.err.println(defenser.getName()+" lose "+totalDamage+" HP !");
     }   
 }

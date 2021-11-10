@@ -21,7 +21,7 @@ public class Mage extends Archetype {
         _magicDamage = magicDamage;
         if(name.equals(""))
         {
-            _name = "Warrior";
+            _name = "Mage";
         }
         else
         {
@@ -35,7 +35,7 @@ public class Mage extends Archetype {
     public int getTotalDamageOnTurn()
     {   
         int damage = (int)(_magicDamage / _magicStamina + _attack);
-        _magicDamage *= 2;
+        _magicStamina *= 2;
         return damage;
     }
     
