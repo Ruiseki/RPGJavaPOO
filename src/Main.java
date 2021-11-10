@@ -9,12 +9,6 @@ class Main
     {
         clear();
         System.out.println("Application has started");
-<<<<<<< HEAD
-        Mage attaquantTest = new Mage();
-        Warrior defenseurTest = new Warrior();
-        attack(attaquantTest, defenseurTest);
-    }
-=======
         /*
             - choisir deux combatants dans le decks
             - faire s'attaquer les deux combatants 
@@ -29,7 +23,6 @@ class Main
         Archetype[] fighters = new Archetype[2];
         Game.menu();
         Game.createCharacter();
->>>>>>> abadce01ce980ebcc2b016ad9bc8c051b6c94853
 
         */
         Archetype[] fighters = new Archetype[2];
