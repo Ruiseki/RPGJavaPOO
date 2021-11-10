@@ -1,4 +1,5 @@
 package GameSystem;
-public interface Game {
+abstract class Game
+{
     
 }
