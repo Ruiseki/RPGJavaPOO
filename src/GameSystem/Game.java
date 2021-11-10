@@ -37,8 +37,14 @@ abstract public class Game {
         return input;
     }
 
-    public static void createCharacter() {
-        System.out.println("Enter the charactre's name");
+    public static void createForBattle(Archetype[] persos){
+        for (int i=0; i<2; i++){
+            createCharacter(persos, i);
+        }
+    }
+
+    public static void createCharacter(Archetype[] persos, int i) {
+        System.out.println("Enter the character's name");
         Scanner sc = new Scanner(System.in);
         String name = sc.nextLine();
 
@@ -52,20 +58,24 @@ abstract public class Game {
             if (file.isFile()){
                 archs.add(file.getName().substring(0, file.getName().length()-5));
             }
-        }       //{Mage, Thief, Warrior}
+        }       //{Mage, Warrior, Thief}
         Archetype perso;
         switch (menu(archs)){
             case 1:
                 perso = new Mage(name);
                 break;
             case 2:
-                perso = new Thief(name);
-                break;
-            case 3:
                 perso = new Warrior(name);
                 break;
+            case 3:
+                perso = new Thief(name);
+                break;
 
+            default:
+                System.out.println("You got a warrior by default");
+                perso = new Warrior(name);
         }
+        persos[i] = perso;
 
     };
     /*

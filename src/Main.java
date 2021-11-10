@@ -25,6 +25,9 @@ class Main
         Game.createCharacter();
 
         */
+        Archetype[] fighters = new Archetype[2];
+        Game.createForBattle(fighters);
+
     }
     
     public static void clear()
