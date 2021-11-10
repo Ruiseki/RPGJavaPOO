@@ -1,3 +1,6 @@
+import Character.*;
+import GameSystem.*;
+
 class Main
 {
     public static void main(String[] args)
