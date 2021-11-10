@@ -22,6 +22,7 @@ class Main
         
         Archetype[] fighters = new Archetype[2];
         Game.menu();
+        Game.createCharacter();
 
         */
     }

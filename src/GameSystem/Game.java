@@ -1,16 +1,22 @@
 package src.GameSystem;
 
 
+import src.Character.Archetype;
+import src.Character.archetype.*;
+
+import java.io.File;
+import java.util.ArrayList;
 import java.util.InputMismatchException;
+import java.util.List;
 import java.util.Scanner;
 
 abstract public class Game {
 
 
-    public static int menu(String[] options){
+    public static int menu(List options){
         System.out.println("Chose :");
-        for (int i=1; i<=options.length; i++){
-            System.out.println(i + " " + options[i-1]);
+        for (int i=1; i<=options.size(); i++){
+            System.out.println(i + " " + options.get(i-1));
         }
         Scanner sc;
         int input = -2;
@@ -19,7 +25,7 @@ abstract public class Game {
             try {
                 sc = new Scanner(System.in);
                 input = sc.nextInt();
-                if (input > 0 && input <= options.length){
+                if (input > 0 && input <= options.size()){
                     isInput = true;
                 }else{
                     System.out.println("Please enter a valid option");
@@ -31,7 +37,37 @@ abstract public class Game {
         return input;
     }
 
-    public static void createCharacter() {};
+    public static void createCharacter() {
+        System.out.println("Enter the charactre's name");
+        Scanner sc = new Scanner(System.in);
+        String name = sc.nextLine();
+
+        System.out.println("Enter " + name + "'s class");
+
+        File folder = new File("./src/Character/archetype/");
+        File[] listOfFiles = folder.listFiles();
+        List archs = new ArrayList();
+
+        for (File file : listOfFiles) {
+            if (file.isFile()){
+                archs.add(file.getName().substring(0, file.getName().length()-5));
+            }
+        }       //{Mage, Thief, Warrior}
+        Archetype perso;
+        switch (menu(archs)){
+            case 1:
+                perso = new Mage(name);
+                break;
+            case 2:
+                perso = new Thief(name);
+                break;
+            case 3:
+                perso = new Warrior(name);
+                break;
+
+        }
+
+    };
     /*
         Permet d'ajouter un personnage jouable dans une liste restreinte (5 perso par personne max)
         Le joueur doit lire le nom du personnage et ça classe. (quelque chose comme Robert - Guerrier)
