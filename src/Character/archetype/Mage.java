@@ -33,7 +33,7 @@ public class Mage extends Archetype {
     }
 
     public int getTotalDamageOnTurn()
-    {   
+    {
         int damage = (int)(_magicDamage / _magicStamina + _attack);
         _magicStamina *= 2;
         return damage;

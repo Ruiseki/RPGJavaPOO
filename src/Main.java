@@ -1,22 +1,46 @@
 package src;
 import src.Character.Archetype;
 import src.Character.archetype.*;
+import src.GameSystem.Game;
 
 class Main
 {
     public static void main(String[] args)
     {
-        System.out.print("\033[H\033[2J");
-        System.out.flush();
+        clear();
         System.out.println("Application has started");
+<<<<<<< HEAD
         Mage attaquantTest = new Mage();
         Warrior defenseurTest = new Warrior();
         attack(attaquantTest, defenseurTest);
     }
+=======
+        /*
+            - choisir deux combatants dans le decks
+            - faire s'attaquer les deux combatants 
+            - s'arrêté quand l'un voit ces HP inférieur ou égale a 0
+            - Afficher le vainceur
 
+            v0.1
+        */
+
+        /* 
+        
+        Archetype[] fighters = new Archetype[2];
+        Game.menu();
+        Game.createCharacter();
+>>>>>>> abadce01ce980ebcc2b016ad9bc8c051b6c94853
+
+        */
+        Archetype[] fighters = new Archetype[2];
+        Game.createForBattle(fighters);
+
+    }
+    
     public static void clear()
     {
-        
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
     }
 
     public static void attack(Archetype offenser, Archetype defenser)
