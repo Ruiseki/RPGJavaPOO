@@ -1,5 +1,6 @@
 import Character.archetype.*;
 import GameSystem.*;
+import java.util.Arrays;
 
 class Main
 {
