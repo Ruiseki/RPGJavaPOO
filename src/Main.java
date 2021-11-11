@@ -39,13 +39,14 @@ class Main
     public static void attack(Archetype offenser, Archetype defenser)
     {
         int totalDamage;
+        double number = Math.random();
 
         System.out.println(offenser.getName()+" is attacking !");
 
         if(offenser instanceof Mage) totalDamage = ((Mage)offenser).getTotalDamageOnTurn();
         else if(offenser instanceof Thief) 
         {
-            double number = Math.random();
+            
             if(number <= ((Thief)offenser).getCriRate())
             {
                 System.out.println(offenser.getName()+ "inflicts critical Damage");
@@ -55,9 +56,7 @@ class Main
         }
         else totalDamage = offenser.getAttack();
         
-        // calcule du taux crit du voleur
-        //if()
-        //else
+       
         System.out.println(offenser.getName()+" give "+totalDamage+" damage to "+defenser.getName()+" !");
 
         if(defenser instanceof Warrior)
@@ -68,7 +67,9 @@ class Main
 
         else if(defenser instanceof Thief)
         {
-            
+            if(number <=((Thief)defenser).getDodge()){
+                totalDamage = 0;
+            }   
         }
         System.err.println(defenser.getName()+" lose "+totalDamage+" HP !");
     }   
