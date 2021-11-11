@@ -30,7 +30,8 @@ class Main
         */
         
         Archetype[] fighters = new Archetype[2];
-        Game.createForBattle(fighters);
+        List temp = new ArrayList();
+        Game.createForBattle(temp, fighters);
 
         int round = 1;
         boolean isEnd;
