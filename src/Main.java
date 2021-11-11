@@ -5,33 +5,31 @@ import src.GameSystem.Game;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 class Main
 {
+    static Scanner sc = new Scanner(System.in);
     public static void main(String[] args)
     {
         clear();
         System.out.println("Application has started");
         /*
             - choisir deux combatants dans le decks
-            - faire s'attaquer les deux combatants 
+            - faire s'attaquer les deux combatants
             - s'arrêté quand l'un voit ces HP inférieur ou égale a 0
             - Afficher le vainceur
 
             v0.1
         */
-
-        /* 
-        
-        Archetype[] fighters = new Archetype[2];
-        Game.menu();
-        Game.createCharacter();
-
-        */
         
         Archetype[] fighters = new Archetype[2];
         List<Archetype> temp = new ArrayList<Archetype>();
         Game.createForBattle(temp, fighters);
+        
+        int[] maxHealth = new int[2]; // get the maximum health of the character for the lifebar
+        maxHealth[0] = fighters[0].getHeath();
+        maxHealth[1] = fighters[1].getHeath();
 
         int round = 1;
         boolean isEnd;
@@ -41,6 +39,7 @@ class Main
             System.out.println("----- ROUND "+round+" -----\n");
 
             attack(fighters[0], fighters[1]); // player 1 attack playe 2
+
             isEnd = Game.isGameFinished(fighters);
 
             if(!isEnd)
@@ -49,7 +48,19 @@ class Main
                 isEnd = Game.isGameFinished(fighters);
             }
 
+            healthBar(fighters, maxHealth);
+
             round++;
+
+            try
+            {
+                Thread.sleep(2000);
+            }
+            catch(InterruptedException ex)
+            {
+                Thread.currentThread().interrupt();
+            }
+
         }while(!isEnd);
         System.out.println("Battle terminate");
     }
@@ -58,6 +69,27 @@ class Main
     {
         System.out.print("\033[H\033[2J");
         System.out.flush();
+    }
+
+    public static void healthBar(Archetype[] fighters, int[] maxHealth)
+    {
+        int fighterIndex = 0; // index of maxhealth
+        for(Archetype fighter : fighters)
+        {
+            String healthBar = fighter.getName()+"\n";
+            healthBar += "HP: [";
+            int numberOfLine = (int)100*fighter.getHeath()/maxHealth[fighterIndex]/10;
+
+            for(int i = 0; i < 10; i++)
+            {
+                if(i < numberOfLine) healthBar += "-";
+                else healthBar += " ";
+            }
+            healthBar += "] "+fighter.getHeath()+"/"+maxHealth[fighterIndex];
+            System.out.println(healthBar+"\n");
+            fighterIndex++;
+        }
+        System.out.println();
     }
 
     public static void attack(Archetype offenser, Archetype defenser)
@@ -99,5 +131,10 @@ class Main
         }
         System.err.println(defenser.getName()+" lose "+totalDamage+" HP !\n");
         defenser.takeDamage(totalDamage);
+    }
+
+    public static Scanner getScanner()
+    {
+        return sc;
     }
 }

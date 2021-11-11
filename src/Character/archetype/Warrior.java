@@ -26,7 +26,7 @@ public class Warrior extends Archetype
         {
             _name = name;
         }
-        _health = 120;
+        _health = 130;
         _initiative = 1;
         _attack = 3;
     }

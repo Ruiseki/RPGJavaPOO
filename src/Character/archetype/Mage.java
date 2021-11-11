@@ -27,7 +27,7 @@ public class Mage extends Archetype {
         {
             _name = name;
         }
-        _health = 70;
+        _health = 80;
         _initiative = 0;
         _attack = 5;
     }
