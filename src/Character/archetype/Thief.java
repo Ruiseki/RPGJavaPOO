@@ -26,7 +26,7 @@ public class Thief extends Archetype {
         }
         else
         {
-            name = _name;
+            _name = name;
         }
         _health = 100;
         _initiative = 3;
