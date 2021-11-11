@@ -37,13 +37,13 @@ abstract public class Game {
         return input;
     }
 
-    public static void createForBattle(Archetype[] persos){
+    public static void createForBattle(List persos){
         for (int i=0; i<2; i++){
-            createCharacter(persos, i);
+            createCharacter(persos);
         }
     }
 
-    public static void createCharacter(Archetype[] persos, int i) {
+    public static void createCharacter(List persos) {
         System.out.println("Enter the character's name");
         Scanner sc = new Scanner(System.in);
         String name = sc.nextLine();
@@ -60,6 +60,9 @@ abstract public class Game {
             }
         }       //{Mage, Warrior, Thief}
         Archetype perso;
+
+        Class[] c = new Class[archs.size()];
+
         switch (menu(archs)){
             case 1:
                 perso = new Mage(name);
@@ -75,7 +78,7 @@ abstract public class Game {
                 System.out.println("You got a warrior by default");
                 perso = new Warrior(name);
         }
-        persos[i] = perso;
+        persos.add(perso);
 
     };
     /*
