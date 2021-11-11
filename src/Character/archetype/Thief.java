@@ -2,16 +2,17 @@ package src.Character.archetype;
 import src.Character.Archetype;
 
 public class Thief extends Archetype {
-    private double _dodge, _critRate, _critDamage;
+    private double _dodge, _critRate;
+    private int _critDamage;
     
     public Thief()
     {
-        this("", 0.25, 0.3);
+        this("", 0.15, 0.3);
     }
 
     public Thief(String name)
     {
-        this(name, 0.25, 0.3);
+        this(name, 0.15, 0.3);
     }
 
     public Thief(String name, double dodge, double critRate)
@@ -57,7 +58,7 @@ public class Thief extends Archetype {
 
 
     public int critDamage(){
-        return _attack *= _critDamage;
+        return _attack * _critDamage;
     }
 
     public double getCritDamage()
@@ -65,7 +66,7 @@ public class Thief extends Archetype {
         return _critDamage;
     }
     
-    public void setCritDamage(double newCritDamage)
+    public void setCritDamage(int newCritDamage)
     {
         _critDamage = newCritDamage;
     }

@@ -7,12 +7,12 @@ public class Warrior extends Archetype
 
     public Warrior()
     {
-        this("", 5);
+        this("", 2);
     }
 
     public Warrior(String name)
     {
-        this(name, 5);
+        this(name, 2);
     }
 
     public Warrior(String name, int shieldStrength)

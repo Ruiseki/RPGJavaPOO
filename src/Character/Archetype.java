@@ -15,6 +15,7 @@ public abstract class Archetype {
     public void takeDamage(int damage)
     {
         _health -= damage;
+        if(_health < 0) _health = 0;
     }
 
     public int getAttack()

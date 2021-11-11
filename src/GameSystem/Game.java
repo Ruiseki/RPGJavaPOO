@@ -105,7 +105,7 @@ abstract public class Game {
 
     public static boolean isGameFinished(Archetype[] persos)
     {
-        for(Archetype perso : persos) if(perso.getHeath() == 0) return true;
+        for(Archetype perso : persos) if(perso.getHeath() == 0) {System.out.println(perso.getName()+" is dead !\n"); return true;}
         return false;
     }
 }

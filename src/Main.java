@@ -25,9 +25,29 @@ class Main
         Game.createCharacter();
 
         */
+        
         Archetype[] fighters = new Archetype[2];
         Game.createForBattle(fighters);
 
+        int round = 1;
+        boolean isEnd;
+        do
+        {
+            clear();
+            System.out.println("----- ROUND "+round+" -----\n");
+
+            attack(fighters[0], fighters[1]); // player 1 attack playe 2
+            isEnd = Game.isGameFinished(fighters);
+
+            if(!isEnd)
+            {
+                attack(fighters[1], fighters[0]); // player 2 attack player 1
+                isEnd = Game.isGameFinished(fighters);
+            }
+
+            round++;
+        }while(!isEnd);
+        System.out.println("Battle terminate");
     }
     
     public static void clear()
@@ -39,7 +59,7 @@ class Main
     public static void attack(Archetype offenser, Archetype defenser)
     {
         int totalDamage;
-        double number = Math.random();
+        double thiefLuck = Math.random();
 
         System.out.println(offenser.getName()+" is attacking !");
 
@@ -47,9 +67,9 @@ class Main
         else if(offenser instanceof Thief) 
         {
             
-            if(number <= ((Thief)offenser).getCriRate())
+            if(thiefLuck <= ((Thief)offenser).getCriRate())
             {
-                System.out.println(offenser.getName()+ "inflicts critical Damage");
+                System.out.println(offenser.getName()+ " inflicts critical damage !");
                 totalDamage = ((Thief)offenser).critDamage();
             }
             else totalDamage = offenser.getAttack();
@@ -64,13 +84,16 @@ class Main
             System.out.println(defenser.getName()+" attempt to parry the attack !");
             totalDamage = ((Warrior)defenser).blockAttack(totalDamage);
         }
-
+        
         else if(defenser instanceof Thief)
         {
-            if(number <=((Thief)defenser).getDodge()){
+            thiefLuck = Math.random();
+            if(thiefLuck <= ((Thief)defenser).getDodge()){
+                System.out.println(defenser.getName()+" dodged the attack !");
                 totalDamage = 0;
             }   
         }
-        System.err.println(defenser.getName()+" lose "+totalDamage+" HP !");
-    }   
+        System.err.println(defenser.getName()+" lose "+totalDamage+" HP !\n");
+        defenser.takeDamage(totalDamage);
+    }
 }
