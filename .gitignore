@@ -2,7 +2,7 @@
 .vscode
 
 ### INTELLIJ
-.ideea
+.idea
 out
 *.iml
 
