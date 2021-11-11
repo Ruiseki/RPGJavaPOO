@@ -5,6 +5,7 @@ import src.Character.Archetype;
 import src.Character.archetype.*;
 
 import java.io.File;
+import java.lang.reflect.Constructor;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.List;
@@ -37,13 +38,14 @@ abstract public class Game {
         return input;
     }
 
-    public static void createForBattle(Archetype[] persos){
+    public static void createForBattle(List persos, Archetype[] forBattle){
         for (int i=0; i<2; i++){
-            createCharacter(persos, i);
+            createCharacter(persos);
+            forBattle[i] = (Archetype) persos.get(persos.size()-1);
         }
     }
 
-    public static void createCharacter(Archetype[] persos, int i) {
+    public static void createCharacter(List persos) {
         System.out.println("Enter the character's name");
         Scanner sc = new Scanner(System.in);
         String name = sc.nextLine();
@@ -60,22 +62,22 @@ abstract public class Game {
             }
         }       //{Mage, Warrior, Thief}
         Archetype perso;
-        switch (menu(archs)){
-            case 1:
-                perso = new Mage(name);
-                break;
-            case 2:
-                perso = new Warrior(name);
-                break;
-            case 3:
-                perso = new Thief(name);
-                break;
 
-            default:
-                System.out.println("You got a warrior by default");
-                perso = new Warrior(name);
+        String[] c = new String[archs.size()];
+        for(int i=0; i<archs.size(); i++){
+            c[i] = "src.Character.archetype." + archs.get(i);
+            System.out.println(c[i]);
         }
-        persos[i] = perso;
+        try {
+            Class arch = Class.forName(c[menu(archs)]);
+            Constructor constr = c.getClass().getConstructor(String.class);
+            perso = constr.newInstance(name);
+
+        } catch (ClassNotFoundException e){
+            System.out.println(name + "is a warrior by default");
+            perso = new Warrior(name);
+        }
+        persos.add(perso);
 
     };
     /*
@@ -86,11 +88,11 @@ abstract public class Game {
     */
 
     public static void deleteCharacter() {};
-    /* 
+    /*
         Supprime un perso de la list des perso jouable par le joueur.
         Doit pouvoir afficher "[ empty ]" lors d'un balayage lorsque la place est libre.
     */
-        
+
     public static void watchCharacterDeck() {};
     /*
         Affiche le deck du joueur qui joue
@@ -105,7 +107,7 @@ abstract public class Game {
 
     public static boolean isGameFinished(Archetype[] persos)
     {
-        for(Archetype perso : persos) if(perso.getHeath() == 0) {System.out.println(perso.getName()+" is dead !\n"); return true;}
+        for(Archetype perso : persos) if(perso.getHeath() == 0) return true;
         return false;
     }
 }

@@ -3,6 +3,9 @@ import src.Character.Archetype;
 import src.Character.archetype.*;
 import src.GameSystem.Game;
 
+import java.util.ArrayList;
+import java.util.List;
+
 class Main
 {
     public static void main(String[] args)
@@ -27,7 +30,8 @@ class Main
         */
         
         Archetype[] fighters = new Archetype[2];
-        Game.createForBattle(fighters);
+        List temp = new ArrayList();
+        Game.createForBattle(temp, fighters);
 
         int round = 1;
         boolean isEnd;
