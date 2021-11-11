@@ -1,4 +1,10 @@
+### VSCODE
 .vscode
+
+### INTELLIJ
 .ideea
+out
 *.iml
+
+### MACOS
 .DS_Store
