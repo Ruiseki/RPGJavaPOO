@@ -102,4 +102,10 @@ abstract public class Game {
         [ empty ]
         [ empty ]
     */
+
+    public static boolean isGameFinished(Archetype[] persos)
+    {
+        for(Archetype perso : persos) if(perso.getHeath() == 0) return true;
+        return false;
+    }
 }
