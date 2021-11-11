@@ -14,7 +14,7 @@ import java.util.Scanner;
 abstract public class Game {
 
 
-    public static int menu(List options){
+    public static int menu(List<String> options){
         System.out.println("Chose :");
         for (int i=1; i<=options.size(); i++){
             System.out.println(i + " " + options.get(i-1));
@@ -38,14 +38,14 @@ abstract public class Game {
         return input;
     }
 
-    public static void createForBattle(List persos, Archetype[] forBattle){
+    public static void createForBattle(List<Archetype> persos, Archetype[] forBattle){
         for (int i=0; i<2; i++){
             createCharacter(persos);
             forBattle[i] = (Archetype) persos.get(persos.size()-1);
         }
     }
 
-    public static void createCharacter(List persos) {
+    public static void createCharacter(List<Archetype> persos) {
         System.out.println("Enter the character's name");
         Scanner sc = new Scanner(System.in);
         String name = sc.nextLine();
@@ -54,7 +54,7 @@ abstract public class Game {
 
         File folder = new File("./src/Character/archetype/");
         File[] listOfFiles = folder.listFiles();
-        List archs = new ArrayList();
+        List<String> archs = new ArrayList<String>();
 
         for (File file : listOfFiles) {
             if (file.isFile()){
@@ -78,8 +78,8 @@ abstract public class Game {
             perso = new Warrior(name);
         }
         persos.add(perso);
-
     };
+
     /*
         Permet d'ajouter un personnage jouable dans une liste restreinte (5 perso par personne max)
         Le joueur doit lire le nom du personnage et ça classe. (quelque chose comme Robert - Guerrier)

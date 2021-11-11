@@ -30,7 +30,7 @@ class Main
         */
         
         Archetype[] fighters = new Archetype[2];
-        List temp = new ArrayList();
+        List<Archetype> temp = new ArrayList<Archetype>();
         Game.createForBattle(temp, fighters);
 
         int round = 1;
