@@ -51,4 +51,16 @@ public class Mage extends Archetype {
     {
         _magicStamina = newMagicStamina;
     }
+
+    @Override
+    public String toString() {
+        return "Mage{" +
+                "_name='" + _name + '\'' +
+                ", _type='" + _type + '\'' +
+                ", _attack=" + _attack +
+                ", _health=" + _health +
+                ", _initiative=" + _initiative +
+                ", _magicDamage=" + _magicDamage +
+                '}';
+    }
 }

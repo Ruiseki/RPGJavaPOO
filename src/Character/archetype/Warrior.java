@@ -40,4 +40,16 @@ public class Warrior extends Archetype
     {
         newShield = _shieldStrength;
     }
+
+    @Override
+    public String toString() {
+        return "Warrior{" +
+                "_name='" + _name + '\'' +
+                ", _type='" + _type + '\'' +
+                ", _attack=" + _attack +
+                ", _health=" + _health +
+                ", _initiative=" + _initiative +
+                ", _shieldStrength=" + _shieldStrength +
+                '}';
+    }
 }
