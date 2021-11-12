@@ -21,12 +21,12 @@ public class Thief extends Archetype {
         _critRate = critRate;
         _critDamage = 2; // 200%
 
-        if(name.equals("")) _name = "Thief";
-        else _name = name;
-        _type = "Thief";
-        _health = 100;
-        _initiative = 3;
-        _attack = 4;
+        if(name.equals("")) this.setName("Thief");
+        else this.setName(name);
+        this.setType("Thief");
+        this.setHealth(100);
+        this.setInitiative(3);
+        this.setAttack(4);
     }
 
 
@@ -53,7 +53,7 @@ public class Thief extends Archetype {
 
 
     public int critDamage(){
-        return _attack * _critDamage;
+        return this.getAttack() * _critDamage;
     }
 
     public double getCritDamage()
