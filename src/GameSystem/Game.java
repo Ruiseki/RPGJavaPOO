@@ -36,8 +36,9 @@ abstract public class Game {
         return input;
     }
 
-    public static void createForBattle(List<Archetype> persos, Archetype[] forBattle){
+    public static void createForBattle(Archetype[] forBattle){
         for (int i=0; i<2; i++){
+            List <Archetype> persos= new ArrayList<Archetype>();
             createCharacter(persos);
             forBattle[i] = (Archetype) persos.get(persos.size()-1);
         }
