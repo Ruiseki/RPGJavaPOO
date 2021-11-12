@@ -109,7 +109,7 @@ abstract public class Game {
         [ empty ]
     */
 
-    public static void menuDeck(Archetype[] fighters,Archetype[] deck)
+    public static void menuDeck(Archetype[] fighters,List<Archetype> deck)
     {
         String select;
         boolean menuExit = false;
@@ -154,43 +154,19 @@ abstract public class Game {
         }while(!menuExit);
     }
 
-    public static void showDeck(Archetype[] deck)
+    public static void showDeck(List<Archetype> deck)
     {
         System.out.println();
-        for(int i=0; i<deck.length; i++)
+        for(int i=0; i < deck.size(); i++)
         {
-            if(deck[i] == null) System.out.println(i+" : [ empty ]");
-            else System.out.println(i+" : ["+deck[i].getType()+"] - "+deck[i].getName());
+            if(deck.get(i) == null) System.out.println(i+" : [ empty ]");
+            else System.out.println(i+" : ["+deck.get(i).getType()+"] - "+deck.get(i).getName());
         }
         System.out.println();
     }
 
-    public static void addToDeck(Archetype[] deck)
+    public static void addToDeck(List<Archetype> deck)
     {
-        int emplacement = -1;
-        for(int i=0; i < deck.length; i++) // check if the deck is full, and if not choose the next free case
-        {
-            if(deck[i] == null)
-            {
-                emplacement = i;
-                break;
-            }
-        }
-
-        if(emplacement == -1)
-        {
-            System.out.println("There is no free emplacement !");
-            try
-            {
-                Thread.sleep(3000);
-            }
-            catch(InterruptedException ex)
-            {
-                Thread.currentThread().interrupt();
-            }
-            return;
-        }
-
         String select;
         String[] args;
         do
@@ -213,39 +189,39 @@ abstract public class Game {
             case 1:
                 try
                 {
-                    deck[emplacement] = new Warrior(args[1]);
+                    deck.add(new Warrior(args[1]));
                 }
                 catch(ArrayIndexOutOfBoundsException ex)
                 {
-                    deck[emplacement] = new Warrior();
+                    deck.add(new Warrior());
                 }
                 break;
 
             case 2:
                 try
                 {
-                    deck[emplacement] = new Mage(args[1]);
+                    deck.add(new Mage(args[1]));
                 }
                 catch(ArrayIndexOutOfBoundsException ex)
                 {
-                    deck[emplacement] = new Mage();
+                    deck.add(new Mage());
                 }
                 break;
 
             case 3:
                 try
                 {
-                    deck[emplacement] = new Thief(args[1]);
+                    deck.add(new Thief(args[1]));
                 }
                 catch(ArrayIndexOutOfBoundsException ex)
                 {
-                    deck[emplacement] = new Thief();
+                    deck.add(new Thief());
                 }
                 break;
         }
     }
 
-    public static void deleteToDeck(Archetype[] deck)
+    public static void deleteToDeck(List<Archetype> deck)
     {
         Main.clear();
         String select;
@@ -255,11 +231,11 @@ abstract public class Game {
             showDeck(deck);
             System.out.println("Enter the name of the hero you want to delete from your deck :");
             select = Main.getScanner().nextLine();
-            for(int i=0; i < deck.length; i++)
+            for(int i=0; i < deck.size(); i++)
             {
-                if(deck[i] != null && deck[i].getName().equals(select))
+                if(deck.get(i).getName().equals(select))
                 {
-                    deck[i] = null;
+                    deck.remove(i);
                     return;
                 }
             }
