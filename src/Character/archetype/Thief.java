@@ -72,7 +72,7 @@ public class Thief extends Archetype {
                 "_name='" + getName() + '\'' +
                 ", _type='" + getType() + '\'' +
                 ", _attack=" + getAttack() +
-                ", _health=" + getHeath() +
+                ", _health=" + getHealth() +
                 ", _initiative=" + getInitiative() +
                 ", _dodge=" + _dodge +
                 ", _critRate=" + _critRate +

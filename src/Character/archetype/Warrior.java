@@ -47,7 +47,7 @@ public class Warrior extends Archetype
                 "_name='" + getName() + '\'' +
                 ", _type='" +getType() + '\'' +
                 ", _attack=" + getAttack() +
-                ", _health=" + getHeath() +
+                ", _health=" + getHealth() +
                 ", _initiative=" + getInitiative() +
                 ", _shieldStrength=" + _shieldStrength +
                 '}';

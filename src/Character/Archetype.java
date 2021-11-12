@@ -22,7 +22,7 @@ public abstract class Archetype {
     {
         return _attack;
     }
-    public int getHeath()
+    public int getHealth()
     {
         return _health;
     }

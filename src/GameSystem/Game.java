@@ -5,7 +5,6 @@ import src.Character.Archetype;
 import src.Character.archetype.*;
 
 import java.io.File;
-import java.lang.module.FindException;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.List;
@@ -50,8 +49,8 @@ abstract public class Game {
             forBattle[i] = (Archetype) persos.get(persos.size()-1);
         }
 
-        maxHealth[0] = forBattle[0].getHeath();
-        maxHealth[1] = forBattle[1].getHeath();
+        maxHealth[0] = forBattle[0].getHealth();
+        maxHealth[1] = forBattle[1].getHealth();
     }
 
     public static void createCharacter(List<Archetype> persos) {
@@ -295,8 +294,8 @@ abstract public class Game {
 
         fighters[0] = deck.get(player1);
         fighters[1] = deck.get(player2);
-        maxHealth[0] = fighters[0].getHeath();
-        maxHealth[1] = fighters[1].getHeath();
+        maxHealth[0] = fighters[0].getHealth();
+        maxHealth[1] = fighters[1].getHealth();
     }
 
     public static void battle(Archetype[] fighters, int[] maxHealth)
@@ -332,12 +331,19 @@ abstract public class Game {
             }
 
         }while(!isEnd);
+
         System.out.println("Battle terminate");
+        for (Archetype fighter : fighters){
+            if (fighter.getHealth()>0){
+                System.out.println(fighter.getName()+" wins");
+            }
+        }
+        System.out.println("");
     }
     
     public static boolean isGameFinished(Archetype[] persos)
     {
-        for(Archetype perso : persos) if(perso.getHeath() == 0) return true;
+        for(Archetype perso : persos) if(perso.getHealth() == 0) return true;
         return false;
     }
 
@@ -348,14 +354,14 @@ abstract public class Game {
         {
             String healthBar = fighter.getName()+"\n";
             healthBar += "HP: [";
-            int numberOfLine = (int)100*fighter.getHeath()/maxHealth[fighterIndex]/10;
+            int numberOfLine = (int)100*fighter.getHealth()/maxHealth[fighterIndex]/10;
 
             for(int i = 0; i < 10; i++)
             {
                 if(i < numberOfLine) healthBar += "-";
                 else healthBar += " ";
             }
-            healthBar += "] "+fighter.getHeath()+"/"+maxHealth[fighterIndex];
+            healthBar += "] "+fighter.getHealth()+"/"+maxHealth[fighterIndex];
             System.out.println(healthBar+"\n");
             fighterIndex++;
         }
