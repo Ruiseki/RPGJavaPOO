@@ -68,15 +68,15 @@ public class Thief extends Archetype {
 
     @Override
     public String toString() {
-        return "Thief{" +
-                "_name='" + getName() + '\'' +
-                ", _type='" + getType() + '\'' +
-                ", _attack=" + getAttack() +
-                ", _health=" + getHeath() +
-                ", _initiative=" + getInitiative() +
-                ", _dodge=" + _dodge +
-                ", _critRate=" + _critRate +
-                ", _critDamage=" + _critDamage +
+        return "Thief {\n" +
+                "\t_name='" + getName() + "\'\n" +
+                "\t_type='" + getType() + "\'\n" +
+                "\t_attack=" + getAttack() +"\n"+
+                "\t_health=" + getHeath() +"\n"+
+                "\t_initiative=" + getInitiative() +"\n"+
+                "\t_dodge=" + _dodge +"\n"+
+                "\t_critRate=" + _critRate +"\n"+
+                "\t_critDamage=" + _critDamage +"\n"+
                 '}';
     }
 }

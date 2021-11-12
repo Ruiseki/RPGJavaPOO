@@ -54,13 +54,13 @@ public class Mage extends Archetype {
 
     @Override
     public String toString() {
-        return "Mage{" +
-                "_name='" + getName() + '\'' +
-                ", _type='" + getType() + '\'' +
-                ", _attack=" + getAttack() +
-                ", _health=" + getHeath() +
-                ", _initiative=" + getInitiative() +
-                ", _magicDamage=" + _magicDamage +
+        return "Mage {\n" +
+                "\t_name='" + getName() + "\'\n" +
+                "\t_type='" + getType() + "\'\n" +
+                "\t_attack=" + getAttack() +"\n" +
+                "\t_health=" + getHeath() +"\n" +
+                "\t_initiative=" + getInitiative() +"\n" +
+                "\t_magicDamage=" + _magicDamage +"\n" +
                 '}';
     }
 }

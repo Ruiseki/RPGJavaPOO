@@ -63,12 +63,12 @@ public abstract class Archetype {
     @Override
     public String toString()
     {
-        return "Archetype{" +
-                "_name='" + _name + '\'' +
-                ", _type='" + _type + '\'' +
-                ", _attack=" + _attack +
-                ", _health=" + _health +
-                ", _initiative=" + _initiative +
+        return "Archetype {\n" +
+                "\t_name='" + _name + "\'\n" +
+                "\t_type='" + _type + "\'\n" +
+                "\t_attack=" + _attack +"\n"+
+                "\t_health=" + _health +"\n"+
+                "\t_initiative=" + _initiative +"\n"+
                 '}';
     }
 }
