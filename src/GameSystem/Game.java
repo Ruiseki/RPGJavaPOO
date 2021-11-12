@@ -46,8 +46,7 @@ abstract public class Game {
 
     public static void createCharacter(List<Archetype> persos) {
         System.out.println("Enter the character's name");
-        Scanner sc = new Scanner(System.in);
-        String name = sc.nextLine();
+        String name = Main.getScanner().nextLine();
 
         System.out.println("Enter " + name + "'s class");
 
@@ -289,9 +288,107 @@ abstract public class Game {
     }
 
 
+    public static void battle(Archetype[] fighters, int[] maxHealth)
+    {
+        int round = 1;
+        boolean isEnd;
+        do // battle rounds
+        {
+            Main.clear();
+            System.out.println("----- ROUND "+round+" -----\n");
+
+            attack(fighters[0], fighters[1]); // player 1 attack playe 2
+
+            isEnd = Game.isGameFinished(fighters);
+
+            if(!isEnd)
+            {
+                attack(fighters[1], fighters[0]); // player 2 attack player 1
+                isEnd = Game.isGameFinished(fighters);
+            }
+
+            healthBar(fighters, maxHealth);
+
+            round++;
+
+            try
+            {
+                Thread.sleep(2000);
+            }
+            catch(InterruptedException ex)
+            {
+                Thread.currentThread().interrupt();
+            }
+
+        }while(!isEnd);
+        System.out.println("Battle terminate");
+    }
+    
     public static boolean isGameFinished(Archetype[] persos)
     {
         for(Archetype perso : persos) if(perso.getHeath() == 0) return true;
         return false;
+    }
+
+    public static void healthBar(Archetype[] fighters, int[] maxHealth)
+    {
+        int fighterIndex = 0; // index of maxhealth
+        for(Archetype fighter : fighters)
+        {
+            String healthBar = fighter.getName()+"\n";
+            healthBar += "HP: [";
+            int numberOfLine = (int)100*fighter.getHeath()/maxHealth[fighterIndex]/10;
+
+            for(int i = 0; i < 10; i++)
+            {
+                if(i < numberOfLine) healthBar += "-";
+                else healthBar += " ";
+            }
+            healthBar += "] "+fighter.getHeath()+"/"+maxHealth[fighterIndex];
+            System.out.println(healthBar+"\n");
+            fighterIndex++;
+        }
+        System.out.println();
+    }
+
+    public static void attack(Archetype offenser, Archetype defenser)
+    {
+        int totalDamage;
+        double thiefLuck = Math.random();
+
+        System.out.println(offenser.getName()+" is attacking !");
+
+        if(offenser instanceof Mage) totalDamage = ((Mage)offenser).getTotalDamageOnTurn();
+        else if(offenser instanceof Thief) 
+        {
+            
+            if(thiefLuck <= ((Thief)offenser).getCriRate())
+            {
+                System.out.println(offenser.getName()+ " inflicts critical damage !");
+                totalDamage = ((Thief)offenser).critDamage();
+            }
+            else totalDamage = offenser.getAttack();
+        }
+        else totalDamage = offenser.getAttack();
+        
+       
+        System.out.println(offenser.getName()+" give "+totalDamage+" damage to "+defenser.getName()+" !");
+
+        if(defenser instanceof Warrior)
+        {
+            System.out.println(defenser.getName()+" attempt to parry the attack !");
+            totalDamage = ((Warrior)defenser).blockAttack(totalDamage);
+        }
+        
+        else if(defenser instanceof Thief)
+        {
+            thiefLuck = Math.random();
+            if(thiefLuck <= ((Thief)defenser).getDodge()){
+                System.out.println(defenser.getName()+" dodged the attack !");
+                totalDamage = 0;
+            }   
+        }
+        System.err.println(defenser.getName()+" lose "+totalDamage+" HP !\n");
+        defenser.takeDamage(totalDamage);
     }
 }
