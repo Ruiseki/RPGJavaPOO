@@ -24,11 +24,13 @@ public class Main
         */
 
         List<Archetype> temp = new ArrayList<Archetype>();
-        Archetype[] fighters = new Archetype[2];
         List<Archetype> deck = new ArrayList<Archetype>();
+        Archetype[] fighters = new Archetype[2];
         int[] maxHealth = new int[2]; // get the maximum health of the character for the lifebar
 
-        Game.createForBattle(temp, fighters);
+        
+
+        Game.createForBattle(fighters);
         Game.menuDeck(fighters ,deck);
         // List<Archetype> temp = new ArrayList<Archetype>();
         // Game.createForBattle(temp, fighters);
