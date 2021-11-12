@@ -25,7 +25,8 @@ abstract public class Game {
         do{
             try {
                 input = getScanner().nextInt();
-                if (input > 0 && input <= options.size()){
+                getScanner().nextLine();
+                if (input > 0 && input <= options.size()){;
                     isInput = true;
                 }else{
                     System.out.println("Please enter a valid option");
@@ -52,7 +53,6 @@ abstract public class Game {
 
     public static void createCharacter(List<Archetype> persos) {
         System.out.println("Enter the character's name");
-        getScanner().nextLine(); // /!\ ⚠⚠⚠ DON'T TOUCH ⚠⚠⚠ /!\
         String name; name = getScanner().nextLine();
 
         System.out.println("Enter " + name + "'s class");
@@ -112,6 +112,7 @@ abstract public class Game {
 
             case 2:
                 battleInit(deck, fighters, maxHealth);
+                Main.clear();
                 battle(fighters, maxHealth);
                 break;
 
@@ -156,6 +157,7 @@ abstract public class Game {
                     break;
     
                 case 3:
+                    Main.clear();
                     renameFighter(deck);
                     break;
     
@@ -283,12 +285,13 @@ abstract public class Game {
 
     public static void battleInit(List<Archetype> deck, Archetype[] fighters, int[] maxHealth)
     {
-        System.out.println(showDeck(deck));
         int player1 = findFighterIndexFromDeckByName(deck, "Enter the name of your your first character");
+        int player2 = findFighterIndexFromDeckByName(deck, "Enter the name of your your second character");
 
-        /* juste avant de commencer le combat
+        fighters[0] = deck.get(player1);
+        fighters[1] = deck.get(player2);
         maxHealth[0] = fighters[0].getHeath();
-        maxHealth[1] = fighters[1].getHeath(); */
+        maxHealth[1] = fighters[1].getHeath();
     }
 
     public static void battle(Archetype[] fighters, int[] maxHealth)
@@ -297,7 +300,7 @@ abstract public class Game {
         boolean isEnd;
         do // battle rounds
         {
-            Main.clear();
+            // Main.clear();
             System.out.println("----- ROUND "+round+" -----\n");
 
             attack(fighters[0], fighters[1]); // player 1 attack playe 2
