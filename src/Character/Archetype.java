@@ -2,8 +2,8 @@ package src.Character;
 
 public abstract class Archetype {
 
-    protected String _name, _type;
-    protected int _attack, _health, _initiative;
+    private String _name, _type;
+    private int _attack, _health, _initiative;
 
     public Archetype() {};
 
@@ -34,7 +34,6 @@ public abstract class Archetype {
     {
         return _name;
     }
-
     public String getType()
     {
         return _type;
@@ -52,13 +51,18 @@ public abstract class Archetype {
     {
         _initiative = newInitiative;
     }
-
-    public void setName(String newName){
+    public void setName(String newName)
+    {
         _name = newName;
+    }
+    public void setType(String newType)
+    {
+        _type = newType;
     }
 
     @Override
-    public String toString() {
+    public String toString()
+    {
         return "Archetype{" +
                 "_name='" + _name + '\'' +
                 ", _type='" + _type + '\'' +

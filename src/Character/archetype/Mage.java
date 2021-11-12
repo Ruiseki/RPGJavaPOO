@@ -19,17 +19,17 @@ public class Mage extends Archetype {
     public Mage(String name, int magicDamage)
     {
         _magicDamage = magicDamage;
-        if(name.equals("")) _name = "Mage";
-        else _name = name;
-        _type = "Mage";
-        _health = 80;
-        _initiative = 0;
-        _attack = 5;
+        if(name.equals("")) this.setName("Mage");
+        else this.setName(name);
+        this.setType("Mage");
+        this.setHealth(80);
+        this.setInitiative(0);
+        this.setAttack(5);
     }
 
     public int getTotalDamageOnTurn()
     {
-        int damage = (int)(_magicDamage / _magicStamina + _attack);
+        int damage = (int)(_magicDamage / _magicStamina + this.getAttack());
         _magicStamina *= 2;
         return damage;
     }

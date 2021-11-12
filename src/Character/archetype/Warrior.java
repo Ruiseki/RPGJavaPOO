@@ -18,12 +18,12 @@ public class Warrior extends Archetype
     public Warrior(String name, int shieldStrength)
     {
         _shieldStrength = shieldStrength;
-        if(name.equals("")) _name = "Warrior";
-        else _name = name;
-        _type = "Warrior";
-        _health = 130;
-        _initiative = 1;
-        _attack = 3;
+        if(name.equals("")) this.setName("Warrior");
+        else this.setName(name);
+        this.setType("Warrior");
+        this.setHealth(130);
+        this.setInitiative(1);
+        this.setAttack(3);
     }
 
     public int blockAttack(int damage)
