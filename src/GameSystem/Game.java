@@ -8,23 +8,22 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.List;
-import java.util.Scanner;
+
+import static src.Main.getScanner;
 
 abstract public class Game {
 
 
-    public static int menu(List<String> options){
+    public static int GenerateMenuAndReturnChoice(List<String> options){
         System.out.println("Chose :");
         for (int i=1; i<=options.size(); i++){
             System.out.println(i + " " + options.get(i-1));
         }
-        Scanner sc;
         int input = -2;
         boolean isInput = false;
         do{
             try {
-                sc = new Scanner(System.in);
-                input = sc.nextInt();
+                input = getScanner().nextInt();
                 if (input > 0 && input <= options.size()){
                     isInput = true;
                 }else{
@@ -46,7 +45,7 @@ abstract public class Game {
 
     public static void createCharacter(List<Archetype> persos) {
         System.out.println("Enter the character's name");
-        String name = Main.getScanner().nextLine();
+        String name = getScanner().nextLine();
 
         System.out.println("Enter " + name + "'s class");
 
@@ -66,7 +65,7 @@ abstract public class Game {
             c[i] = "src.Character.archetype." + archs.get(i);
         }
         try {
-            Class arch = Class.forName(c[menu(archs)-1]);
+            Class arch = Class.forName(c[GenerateMenuAndReturnChoice(archs)-1]);
             perso = (Archetype) arch.newInstance();
 
             perso.setName(name);
@@ -111,24 +110,20 @@ abstract public class Game {
 
     public static void menuDeck(Archetype[] fighters,Archetype[] deck)
     {
-        String select;
+        int select;
         boolean menuExit = false;
         do
         {
-            do
-            {
-                Main.clear();
-                showDeck(deck);
-                System.out.println(
-                    "1 -> Start a battle\n"+
-                    "2 -> Create character\n"+
-                    "3 -> Delete character\n"+
-                    "4 -> Exit\n"
-                );
-                select = Main.getScanner().nextLine();
-            }while(!Main.isInteger(select) || Integer.parseInt(select) < 1 || Integer.parseInt(select) > 4);
+            List options = new ArrayList();
+            options.add("Start a battle");
+            options.add("Create character");
+            options.add("Delete character");
+            options.add("Exit");
+
+            select = GenerateMenuAndReturnChoice(options);
+
     
-            switch(Integer.parseInt(select))
+            switch(select)
             {
                 case 1:
                     startABattle();
@@ -144,7 +139,7 @@ abstract public class Game {
                     break;
     
                 case 4:
-                    Main.getScanner().close();
+                    getScanner().close();
                     System.exit(0);
                     break;
 
@@ -204,7 +199,7 @@ abstract public class Game {
                 "\n syntaxe tips : Integer [optional name for your hero]"
             );
 
-            select = Main.getScanner().nextLine();
+            select = getScanner().nextLine();
             args = select.split(" ");
         }while(!Main.isInteger(args[0]) || Integer.parseInt(args[0]) < 1 || Integer.parseInt(args[0]) > 3);
 
@@ -254,7 +249,7 @@ abstract public class Game {
             Main.clear();
             showDeck(deck);
             System.out.println("Enter the name of the hero you want to delete from your deck :");
-            select = Main.getScanner().nextLine();
+            select = getScanner().nextLine();
             for(int i=0; i < deck.length; i++)
             {
                 if(deck[i] != null && deck[i].getName().equals(select))
