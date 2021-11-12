@@ -21,14 +21,9 @@ public class Thief extends Archetype {
         _critRate = critRate;
         _critDamage = 2; // 200%
 
-        if(name.equals(""))
-        {
-            _name = "Thief";
-        }
-        else
-        {
-            _name = name;
-        }
+        if(name.equals("")) _name = "Thief";
+        else _name = name;
+        _type = "Thief";
         _health = 100;
         _initiative = 3;
         _attack = 4;

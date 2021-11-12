@@ -1,12 +1,12 @@
 package src.GameSystem;
 
-
+import src.*;
 import src.Character.Archetype;
 import src.Character.archetype.*;
 
-import java.io.File;
-import java.lang.reflect.Constructor;
-import java.util.ArrayList;
+// import java.io.File;
+// import java.lang.reflect.Constructor;
+// import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
@@ -38,7 +38,7 @@ abstract public class Game {
         return input;
     }
 
-    public static void createForBattle(List<Archetype> persos, Archetype[] forBattle){
+/*     public static void createForBattle(List<Archetype> persos, Archetype[] forBattle){
         for (int i=0; i<2; i++){
             createCharacter(persos);
             forBattle[i] = (Archetype) persos.get(persos.size()-1);
@@ -78,7 +78,7 @@ abstract public class Game {
             perso = new Warrior(name);
         }
         persos.add(perso);
-    };
+    }; */
 
     /*
         Permet d'ajouter un personnage jouable dans une liste restreinte (5 perso par personne max)
@@ -104,6 +104,185 @@ abstract public class Game {
         [ empty ]
         [ empty ]
     */
+
+    public static void menuDeck(Archetype[] fighters,Archetype[] deck)
+    {
+        String select;
+        boolean menuExit = false;
+        do
+        {
+            do
+            {
+                Main.clear();
+                showDeck(deck);
+                System.out.println(
+                    "1 -> Start a battle\n"+
+                    "2 -> Create character\n"+
+                    "3 -> Delete character\n"+
+                    "4 -> Exit\n"
+                );
+                select = Main.getScanner().nextLine();
+            }while(!Main.isInteger(select) || Integer.parseInt(select) < 1 || Integer.parseInt(select) > 4);
+    
+            switch(Integer.parseInt(select))
+            {
+                case 1:
+                    startABattle();
+                    menuExit = true;
+                    break;
+    
+                case 2:
+                    addToDeck(deck);
+                    break;
+    
+                case 3:
+                    deleteToDeck(deck);
+                    break;
+    
+                case 4:
+                    Main.getScanner().close();
+                    System.exit(0);
+                    break;
+
+                default:
+                    menuExit = false;
+            }
+        }while(!menuExit);
+    }
+
+    public static void showDeck(Archetype[] deck)
+    {
+        System.out.println();
+        for(Archetype card : deck)
+        {
+            if(card == null) System.out.println("[ empty ]");
+            else System.out.println("["+card.getType()+"] - "+card.getName());
+        }
+        System.out.println();
+    }
+
+    public static void addToDeck(Archetype[] deck)
+    {
+        int emplacement = -1;
+        for(int i=0; i < deck.length; i++) // check if the deck is full, and if not choose the next free case
+        {
+            if(deck[i] == null)
+            {
+                emplacement = i;
+                break;
+            }
+        }
+
+        if(emplacement == -1)
+        {
+            System.out.println("There is no free emplacement !");
+            try
+            {
+                Thread.sleep(3000);
+            }
+            catch(InterruptedException ex)
+            {
+                Thread.currentThread().interrupt();
+            }
+            return;
+        }
+
+        String select;
+        String[] args;
+        do
+        {
+            Main.clear();
+            System.out.println(
+                "Type : \n"+
+                "1 -> Warrior\n"+
+                "2 -> Mage\n"+
+                "3 -> Thief\n"+
+                "\n syntaxe tips : Integer [optional name for your hero]"
+            );
+
+            select = Main.getScanner().nextLine();
+            args = select.split(" ");
+        }while(!Main.isInteger(args[0]) || Integer.parseInt(args[0]) < 1 || Integer.parseInt(args[0]) > 3);
+
+        switch(Integer.parseInt(args[0]))
+        {
+            case 1:
+                try
+                {
+                    deck[emplacement] = new Warrior(args[1]);
+                }
+                catch(ArrayIndexOutOfBoundsException ex)
+                {
+                    deck[emplacement] = new Warrior();
+                }
+                break;
+
+            case 2:
+                try
+                {
+                    deck[emplacement] = new Mage(args[1]);
+                }
+                catch(ArrayIndexOutOfBoundsException ex)
+                {
+                    deck[emplacement] = new Mage();
+                }
+                break;
+
+            case 3:
+                try
+                {
+                    deck[emplacement] = new Thief(args[1]);
+                }
+                catch(ArrayIndexOutOfBoundsException ex)
+                {
+                    deck[emplacement] = new Thief();
+                }
+                break;
+        }
+    }
+
+    public static void deleteToDeck(Archetype[] deck)
+    {
+        Main.clear();
+        String select;
+        while(true)
+        {
+            Main.clear();
+            showDeck(deck);
+            System.out.println("Enter the name of the hero you want to delete from your deck :");
+            select = Main.getScanner().nextLine();
+            for(int i=0; i < deck.length; i++)
+            {
+                if(deck[i] != null && deck[i].getName().equals(select))
+                {
+                    deck[i] = null;
+                    return;
+                }
+            }
+
+            Main.clear();
+            System.out.println("Can't find the hero !");
+            try
+            {
+                Thread.sleep(2000);
+            }
+            catch(InterruptedException ex)
+            {
+                Thread.currentThread().interrupt();
+            }
+        }
+    }
+
+    public static void renameFighter(Archetype[] deck)
+    {
+
+    }
+
+    public static void startABattle()
+    {
+
+    }
+
 
     public static boolean isGameFinished(Archetype[] persos)
     {

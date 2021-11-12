@@ -18,14 +18,9 @@ public class Warrior extends Archetype
     public Warrior(String name, int shieldStrength)
     {
         _shieldStrength = shieldStrength;
-        if(name.equals(""))
-        {
-            _name = "Warrior";
-        }
-        else
-        {
-            _name = name;
-        }
+        if(name.equals("")) _name = "Warrior";
+        else _name = name;
+        _type = "Warrior";
         _health = 130;
         _initiative = 1;
         _attack = 3;

@@ -3,11 +3,11 @@ import src.Character.Archetype;
 import src.Character.archetype.*;
 import src.GameSystem.Game;
 
-import java.util.ArrayList;
-import java.util.List;
+// import java.util.ArrayList;
+// import java.util.List;
 import java.util.Scanner;
 
-class Main
+public class Main
 {
     static Scanner sc = new Scanner(System.in);
     public static void main(String[] args)
@@ -24,8 +24,10 @@ class Main
         */
         
         Archetype[] fighters = new Archetype[2];
-        List<Archetype> temp = new ArrayList<Archetype>();
-        Game.createForBattle(temp, fighters);
+        Archetype[] deck = new Archetype[5];
+        Game.menuDeck(fighters ,deck);
+        // List<Archetype> temp = new ArrayList<Archetype>();
+        // Game.createForBattle(temp, fighters);
         
         int[] maxHealth = new int[2]; // get the maximum health of the character for the lifebar
         maxHealth[0] = fighters[0].getHeath();
@@ -33,7 +35,7 @@ class Main
 
         int round = 1;
         boolean isEnd;
-        do
+        do // battle rounds
         {
             clear();
             System.out.println("----- ROUND "+round+" -----\n");
@@ -136,5 +138,18 @@ class Main
     public static Scanner getScanner()
     {
         return sc;
+    }
+
+    public static boolean isInteger(String value)
+    {
+        try
+        {
+            Integer.parseInt(value);
+            return true;
+        }
+        catch(NumberFormatException e)
+        {
+            return false;
+        }  
     }
 }

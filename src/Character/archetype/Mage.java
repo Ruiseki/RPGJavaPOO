@@ -19,14 +19,9 @@ public class Mage extends Archetype {
     public Mage(String name, int magicDamage)
     {
         _magicDamage = magicDamage;
-        if(name.equals(""))
-        {
-            _name = "Mage";
-        }
-        else
-        {
-            _name = name;
-        }
+        if(name.equals("")) _name = "Mage";
+        else _name = name;
+        _type = "Mage";
         _health = 80;
         _initiative = 0;
         _attack = 5;

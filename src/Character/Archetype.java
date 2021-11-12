@@ -2,7 +2,7 @@ package src.Character;
 
 public abstract class Archetype {
 
-    protected String _name;
+    protected String _name, _type;
     protected int _attack, _health, _initiative;
 
     public Archetype() {};
@@ -33,6 +33,11 @@ public abstract class Archetype {
     public String getName()
     {
         return _name;
+    }
+
+    public String getType()
+    {
+        return _type;
     }
 
     public void setAttack(int newAttack)
