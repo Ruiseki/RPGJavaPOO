@@ -44,11 +44,11 @@ public class Warrior extends Archetype
     @Override
     public String toString() {
         return "Warrior{" +
-                "_name='" + _name + '\'' +
-                ", _type='" + _type + '\'' +
-                ", _attack=" + _attack +
-                ", _health=" + _health +
-                ", _initiative=" + _initiative +
+                "_name='" + getName() + '\'' +
+                ", _type='" +getType() + '\'' +
+                ", _attack=" + getAttack() +
+                ", _health=" + getHeath() +
+                ", _initiative=" + getInitiative() +
                 ", _shieldStrength=" + _shieldStrength +
                 '}';
     }
