@@ -36,8 +36,9 @@ abstract public class Game {
         return input;
     }
 
-    public static void createForBattle(List<Archetype> persos, Archetype[] forBattle){
+    public static void createForBattle(Archetype[] forBattle){
         for (int i=0; i<2; i++){
+            List <Archetype> persos= new ArrayList<Archetype>();
             createCharacter(persos);
             forBattle[i] = (Archetype) persos.get(persos.size()-1);
         }
@@ -83,9 +84,12 @@ abstract public class Game {
         persos.add(perso);
     };
 
-    public static void mainMenu()
+    public static void mainMenu(List<Archetype> deck, Archetype[] fighters, int[] maxHealth)
     {
-        
+
+        // juste avant de commencer le combat
+        maxHealth[0] = fighters[0].getHeath();
+        maxHealth[1] = fighters[1].getHeath();
     }
 
     public static void menuDeck(Archetype[] fighters,List<Archetype> deck)
@@ -106,7 +110,7 @@ abstract public class Game {
             switch(select)
             {
                 case 1:
-                    startABattle();
+                    startABattle(deck, fighters);
                     menuExit = true;
                     break;
     
@@ -233,6 +237,10 @@ abstract public class Game {
 
     }
 
+    public static void startABattle(List<Archetype> deck, Archetype[] fighters)
+    {
+
+    }
 
     public static void battle(Archetype[] fighters, int[] maxHealth)
     {

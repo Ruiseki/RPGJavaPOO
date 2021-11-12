@@ -14,31 +14,12 @@ public class Main
     {
         clear();
         System.out.println("Application has started");
-        /*
-            - choisir deux combatants dans le decks
-            - faire s'attaquer les deux combatants
-            - s'arrêté quand l'un voit ces HP inférieur ou égale a 0
-            - Afficher le vainceur
 
-            v0.1
-        */
-
-        List<Archetype> temp = new ArrayList<Archetype>();
         List<Archetype> deck = new ArrayList<Archetype>();
         Archetype[] fighters = new Archetype[2];
         int[] maxHealth = new int[2]; // get the maximum health of the character for the lifebar
 
-        
-
-        Game.createForBattle(fighters);
-        Game.menuDeck(fighters ,deck);
-        // List<Archetype> temp = new ArrayList<Archetype>();
-        // Game.createForBattle(temp, fighters);
-        
-        maxHealth[0] = fighters[0].getHeath();
-        maxHealth[1] = fighters[1].getHeath();
-
-        Game.battle(fighters, maxHealth);
+        Game.mainMenu(deck, fighters, maxHealth);
     }
     
     public static void clear()
