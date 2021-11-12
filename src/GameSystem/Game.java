@@ -142,6 +142,7 @@ abstract public class Game {
             options.add("Create character");
             options.add("Delete character");
             options.add("Rename character");
+            options.add("Get info");
             options.add("Back to menu");
 
             select = GenerateMenuAndReturnChoice(showDeck(deck), options);
@@ -164,8 +165,14 @@ abstract public class Game {
                     Main.clear();
                     renameFighter(deck);
                     break;
-    
+                
                 case 4:
+                    Main.clear();
+                    System.out.println(deck.get(findFighterIndexFromDeckByName(deck, "Enter the name of the character you want the info about : ")).toString());
+                    Main.getScanner().nextLine();
+                    break;
+                
+                case 5:
                     menuExit = true;
                     break;
 
