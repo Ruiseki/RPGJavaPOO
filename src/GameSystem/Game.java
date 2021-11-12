@@ -4,9 +4,8 @@ import src.*;
 import src.Character.Archetype;
 import src.Character.archetype.*;
 
-// import java.io.File;
-// import java.lang.reflect.Constructor;
-// import java.util.ArrayList;
+import java.io.File;
+import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
@@ -38,7 +37,7 @@ abstract public class Game {
         return input;
     }
 
-/*     public static void createForBattle(List<Archetype> persos, Archetype[] forBattle){
+    public static void createForBattle(List<Archetype> persos, Archetype[] forBattle){
         for (int i=0; i<2; i++){
             createCharacter(persos);
             forBattle[i] = (Archetype) persos.get(persos.size()-1);
@@ -66,19 +65,25 @@ abstract public class Game {
         String[] c = new String[archs.size()];
         for(int i=0; i<archs.size(); i++){
             c[i] = "src.Character.archetype." + archs.get(i);
-            System.out.println(c[i]);
         }
         try {
-            Class arch = Class.forName(c[menu(archs)]);
-            Constructor constr = c.getClass().getConstructor(String.class);
-            perso = constr.newInstance(name);
+            Class arch = Class.forName(c[menu(archs)-1]);
+            perso = (Archetype) arch.newInstance();
+
+            perso.setName(name);
 
         } catch (ClassNotFoundException e){
             System.out.println(name + "is a warrior by default");
             perso = new Warrior(name);
+        } catch (InstantiationException e){
+            System.out.println(name + "is a warrior by default");
+            perso = new Warrior(name);
+        } catch (IllegalAccessException e){
+            System.out.println(name + "is a warrior by default");
+            perso = new Warrior(name);
         }
         persos.add(perso);
-    }; */
+    };
 
     /*
         Permet d'ajouter un personnage jouable dans une liste restreinte (5 perso par personne max)

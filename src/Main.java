@@ -3,8 +3,8 @@ import src.Character.Archetype;
 import src.Character.archetype.*;
 import src.GameSystem.Game;
 
-// import java.util.ArrayList;
-// import java.util.List;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Main
@@ -22,8 +22,10 @@ public class Main
 
             v0.1
         */
-        
+
+        List temp = new ArrayList();
         Archetype[] fighters = new Archetype[2];
+        Game.createForBattle(temp, fighters);
         Archetype[] deck = new Archetype[5];
         Game.menuDeck(fighters ,deck);
         // List<Archetype> temp = new ArrayList<Archetype>();

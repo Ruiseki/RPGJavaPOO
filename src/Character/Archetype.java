@@ -56,4 +56,15 @@ public abstract class Archetype {
     public void setName(String newName){
         _name = newName;
     }
+
+    @Override
+    public String toString() {
+        return "Archetype{" +
+                "_name='" + _name + '\'' +
+                ", _type='" + _type + '\'' +
+                ", _attack=" + _attack +
+                ", _health=" + _health +
+                ", _initiative=" + _initiative +
+                '}';
+    }
 }
