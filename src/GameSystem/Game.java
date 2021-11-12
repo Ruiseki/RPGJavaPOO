@@ -43,12 +43,15 @@ abstract public class Game {
         return GenerateMenuAndReturnChoice("Chose : ", options);
     }
 
-    public static void createForBattle(Archetype[] forBattle){
+    public static void createForBattle(Archetype[] forBattle, int[] maxHealth){
         for (int i=0; i<2; i++){
             List <Archetype> persos= new ArrayList<Archetype>();
             createCharacter(persos);
             forBattle[i] = (Archetype) persos.get(persos.size()-1);
         }
+
+        maxHealth[0] = forBattle[0].getHeath();
+        maxHealth[1] = forBattle[1].getHeath();
     }
 
     public static void createCharacter(List<Archetype> persos) {
@@ -107,7 +110,9 @@ abstract public class Game {
         switch(select)
         {
             case 1:
-                createForBattle(fighters);
+                createForBattle(fighters, maxHealth);
+                Main.clear();
+                battle(fighters, maxHealth);
                 break;
 
             case 2:
@@ -183,7 +188,7 @@ abstract public class Game {
         {
             for(int i=0; i < deck.size(); i++)
             {
-                text += i+" : ["+deck.get(i).getType()+"] - "+deck.get(i).getName()+"\n";
+                text += (i+1)+" : ["+deck.get(i).getType()+"] - "+deck.get(i).getName()+"\n";
             }
         }
         text += "\n";
@@ -300,7 +305,7 @@ abstract public class Game {
         boolean isEnd;
         do // battle rounds
         {
-            // Main.clear();
+            Main.clear();
             System.out.println("----- ROUND "+round+" -----\n");
 
             attack(fighters[0], fighters[1]); // player 1 attack playe 2
