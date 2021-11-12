@@ -300,7 +300,7 @@ abstract public class Game {
         boolean isEnd;
         do // battle rounds
         {
-            // Main.clear();
+            Main.clear();
             System.out.println("----- ROUND "+round+" -----\n");
 
             attack(fighters[0], fighters[1]); // player 1 attack playe 2
