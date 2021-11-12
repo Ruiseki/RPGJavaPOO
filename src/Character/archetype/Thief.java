@@ -66,4 +66,17 @@ public class Thief extends Archetype {
         _critDamage = newCritDamage;
     }
 
+    @Override
+    public String toString() {
+        return "Thief{" +
+                "_name='" + _name + '\'' +
+                ", _type='" + _type + '\'' +
+                ", _attack=" + _attack +
+                ", _health=" + _health +
+                ", _initiative=" + _initiative +
+                ", _dodge=" + _dodge +
+                ", _critRate=" + _critRate +
+                ", _critDamage=" + _critDamage +
+                '}';
+    }
 }

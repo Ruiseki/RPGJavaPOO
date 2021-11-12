@@ -157,10 +157,10 @@ abstract public class Game {
     public static void showDeck(Archetype[] deck)
     {
         System.out.println();
-        for(Archetype card : deck)
+        for(int i=0; i<deck.length; i++)
         {
-            if(card == null) System.out.println("[ empty ]");
-            else System.out.println("["+card.getType()+"] - "+card.getName());
+            if(deck[i] == null) System.out.println(i+" : [ empty ]");
+            else System.out.println(i+" : ["+deck[i].getType()+"] - "+deck[i].getName());
         }
         System.out.println();
     }
