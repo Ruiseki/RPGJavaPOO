@@ -5,6 +5,7 @@ import src.Character.Archetype;
 import src.Character.archetype.*;
 
 import java.io.File;
+import java.lang.module.FindException;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.List;
@@ -13,11 +14,11 @@ import static src.Main.getScanner;
 
 abstract public class Game {
 
-
-    public static int GenerateMenuAndReturnChoice(List<String> options){
-        System.out.println("Chose :");
+    public static int GenerateMenuAndReturnChoice(String title, List<String> options)
+    {
+        System.out.println(title);
         for (int i=1; i<=options.size(); i++){
-            System.out.println(i + " " + options.get(i-1));
+            System.out.println(i + " -> " + options.get(i-1));
         }
         int input = -2;
         boolean isInput = false;
@@ -36,6 +37,11 @@ abstract public class Game {
         return input;
     }
 
+    public static int GenerateMenuAndReturnChoice(List<String> options)
+    {
+        return GenerateMenuAndReturnChoice("Chose : ", options);
+    }
+
     public static void createForBattle(Archetype[] forBattle){
         for (int i=0; i<2; i++){
             List <Archetype> persos= new ArrayList<Archetype>();
@@ -46,7 +52,8 @@ abstract public class Game {
 
     public static void createCharacter(List<Archetype> persos) {
         System.out.println("Enter the character's name");
-        String name = getScanner().nextLine();
+        getScanner().nextLine(); // /!\ ⚠⚠⚠ DON'T TOUCH ⚠⚠⚠ /!\
+        String name; name = getScanner().nextLine();
 
         System.out.println("Enter " + name + "'s class");
 
@@ -86,10 +93,37 @@ abstract public class Game {
 
     public static void mainMenu(List<Archetype> deck, Archetype[] fighters, int[] maxHealth)
     {
+        Main.clear();
+        int select;
+        List<String> options = new ArrayList<String>();
+        options.add("Quick Battle");
+        options.add("Start a Battle");
+        options.add("Manage Deck");
+        options.add("Exit");
 
-        // juste avant de commencer le combat
-        maxHealth[0] = fighters[0].getHeath();
-        maxHealth[1] = fighters[1].getHeath();
+        select = GenerateMenuAndReturnChoice("Main menu", options);
+        Main.clear();
+
+        switch(select)
+        {
+            case 1:
+                createForBattle(fighters);
+                break;
+
+            case 2:
+                battleInit(deck, fighters, maxHealth);
+                battle(fighters, maxHealth);
+                break;
+
+            case 3:
+                menuDeck(fighters, deck);
+                break;
+
+            case 4:
+                Main.getScanner().close();
+                System.exit(0);
+                break;
+        }
     }
 
     public static void menuDeck(Archetype[] fighters,List<Archetype> deck)
@@ -98,33 +132,35 @@ abstract public class Game {
         boolean menuExit = false;
         do
         {
-            List options = new ArrayList();
-            options.add("Start a battle");
+            Main.clear();
+            List<String> options = new ArrayList<String>();
             options.add("Create character");
             options.add("Delete character");
-            options.add("Exit");
+            options.add("Rename character");
+            options.add("Back to menu");
 
-            select = GenerateMenuAndReturnChoice(options);
+            select = GenerateMenuAndReturnChoice(showDeck(deck), options);
 
-    
             switch(select)
             {
                 case 1:
-                    startABattle(deck, fighters);
-                    menuExit = true;
+                    Main.clear();
+                    // addToDeck(deck);
+                    createCharacter(deck);
                     break;
     
                 case 2:
-                    addToDeck(deck);
+                    Main.clear();
+                    deleteToDeck(deck);
+                    Main.clear();
                     break;
     
                 case 3:
-                    deleteToDeck(deck);
+                    renameFighter(deck);
                     break;
     
                 case 4:
-                    getScanner().close();
-                    System.exit(0);
+                    menuExit = true;
                     break;
 
                 default:
@@ -133,15 +169,23 @@ abstract public class Game {
         }while(!menuExit);
     }
 
-    public static void showDeck(List<Archetype> deck)
+    public static String showDeck(List<Archetype> deck)
     {
+        String text = "\n";
         System.out.println();
-        for(int i=0; i < deck.size(); i++)
+        if(deck.size() == 0)
         {
-            if(deck.get(i) == null) System.out.println(i+" : [ empty ]");
-            else System.out.println(i+" : ["+deck.get(i).getType()+"] - "+deck.get(i).getName());
+            text += "[ empty ]\n";
         }
-        System.out.println();
+        else
+        {
+            for(int i=0; i < deck.size(); i++)
+            {
+                text += i+" : ["+deck.get(i).getType()+"] - "+deck.get(i).getName()+"\n";
+            }
+        }
+        text += "\n";
+        return text;
     }
 
     public static void addToDeck(List<Archetype> deck)
@@ -156,7 +200,7 @@ abstract public class Game {
                 "1 -> Warrior\n"+
                 "2 -> Mage\n"+
                 "3 -> Thief\n"+
-                "\n syntaxe tips : Integer [optional name for your hero]"
+                "\nsyntaxe tips : Integer [optional name for your hero]\n"
             );
 
             select = getScanner().nextLine();
@@ -202,21 +246,26 @@ abstract public class Game {
 
     public static void deleteToDeck(List<Archetype> deck)
     {
-        Main.clear();
-        String select;
+        deck.remove(findFighterIndexFromDeckByName(deck, "Enter the name of the hero you want to delete from your deck :"));
+    }
+
+    public static void renameFighter(List<Archetype> deck)
+    {
+        int index = findFighterIndexFromDeckByName(deck, "Enter the name of the hero you want to rename :");
+        System.out.println("New name : ");
+        deck.get(index).setName(Main.getScanner().nextLine().split(" ")[0]);
+    }
+
+    public static int findFighterIndexFromDeckByName(List<Archetype> deck, String indication)
+    {
         while(true)
         {
-            Main.clear();
-            showDeck(deck);
-            System.out.println("Enter the name of the hero you want to delete from your deck :");
-            select = Main.getScanner().nextLine();
+            System.out.println(showDeck(deck));
+            System.out.println(indication);
+            String select = Main.getScanner().nextLine();
             for(int i=0; i < deck.size(); i++)
             {
-                if(deck.get(i).getName().equals(select))
-                {
-                    deck.remove(i);
-                    return;
-                }
+                if(deck.get(i).getName().equals(select)) return i;
             }
 
             Main.clear();
@@ -232,14 +281,14 @@ abstract public class Game {
         }
     }
 
-    public static void renameFighter(Archetype[] deck)
+    public static void battleInit(List<Archetype> deck, Archetype[] fighters, int[] maxHealth)
     {
+        System.out.println(showDeck(deck));
+        int player1 = findFighterIndexFromDeckByName(deck, "Enter the name of your your first character");
 
-    }
-
-    public static void startABattle(List<Archetype> deck, Archetype[] fighters)
-    {
-
+        /* juste avant de commencer le combat
+        maxHealth[0] = fighters[0].getHeath();
+        maxHealth[1] = fighters[1].getHeath(); */
     }
 
     public static void battle(Archetype[] fighters, int[] maxHealth)

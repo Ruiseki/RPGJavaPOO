@@ -13,13 +13,14 @@ public class Main
     public static void main(String[] args)
     {
         clear();
-        System.out.println("Application has started");
+        System.out.println("Application has started \n");
 
         List<Archetype> deck = new ArrayList<Archetype>();
         Archetype[] fighters = new Archetype[2];
         int[] maxHealth = new int[2]; // get the maximum health of the character for the lifebar
 
-        Game.mainMenu(deck, fighters, maxHealth);
+        while(true)
+            Game.mainMenu(deck, fighters, maxHealth);
     }
     
     public static void clear()
